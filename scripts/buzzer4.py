@@ -39,5 +39,8 @@ def exec_music(goal):
 if __name__=="__main__":
     rospy.init_node("buzzer")
     rospy.Subscriber("buzzer",UInt16, recv_buzzer)
+    music = actionlib.SimpleActionServer("music", MusicAction, exec_music, False)
+    music.start()
+    rospy.on_shutdown(write_freq)
     rospy.spin()
 
